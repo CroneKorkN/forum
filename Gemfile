@@ -45,3 +45,5 @@ group :development do
   gem 'spring'
 end
 
+gem 'mysql2', '~> 0.3.18'
+gem 'thin'
