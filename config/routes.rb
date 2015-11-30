@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :settings
+  resources :setting_groups
+  resources :attachments
+  resources :media
+  resources :user_roles
+  resources :role_permissions
+  resources :permissions
+  resources :roles
+  resources :posts
+  resources :topics
+  resources :categories
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

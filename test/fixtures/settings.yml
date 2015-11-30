@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  value: MyText
+  type: 
+  name: MyString
+  description: MyText
+  setting_group_id: 
+  order: 1
+
+two:
+  key: MyString
+  value: MyText
+  type: 
+  name: MyString
+  description: MyText
+  setting_group_id: 
+  order: 1
