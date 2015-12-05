@@ -47,3 +47,4 @@ end
 
 gem 'mysql2', '~> 0.3.18'
 gem 'thin'
+gem "slim-rails"

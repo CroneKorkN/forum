@@ -14,7 +14,8 @@ class TopicsController < ApplicationController
 
   # GET /topics/new
   def new
-    @topic = Topic.new
+    @category = Category.find params[:category_id]
+    @topic = @category.topics.new
   end
 
   # GET /topics/1/edit

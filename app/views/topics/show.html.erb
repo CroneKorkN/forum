@@ -1,19 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h2>
+  <%= link_to @topic.category.name, @topic.category %>: <%= @topic.name %>
+  <%= link_to '[e]', edit_topic_path(@topic) %>
+</h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @topic.name %>
-</p>
+<ul>
+  <%= render @topic.posts %>
+</ul>
 
-<p>
-  <strong>Category:</strong>
-  <%= @topic.category %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @topic.user %>
-</p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Answer', new_topic_post_path(@topic) %>

@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
+<h2><%= link_to @category.name, @category %>
+  <%= link_to '[e]', edit_category_path(@category) %>
+  <%= link_to '[x]', @category, method: :delete, data: { confirm: 'Are you sure?' } %>
+</h2>
+<%= @category.description %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+<!-- sub categories -->
+<ul>
+  <%= render partial: "sub_category", collection: @category.categories, as: :category %>
+</ul>
 
-<p>
-  <strong>Description:</strong>
-  <%= @category.description %>
-</p>
+<!-- topics -->
+<ul>
+  <%= render @category.topics %>
+</ul>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'New Topic', new_category_topic_path(@category) %>
