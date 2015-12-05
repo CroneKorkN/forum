@@ -9,6 +9,13 @@
   <body>
     <page-header>
       <%= link_to "root", "/" %>
+      <% if current_user %>
+        Hallo, <%= current_user.name %>
+        <%= link_to "Log Out", logout_path %>
+      <% else %>
+        <%= link_to "Einloggen", login_path %> |
+        <%= link_to "Registrieren", signup_path %>
+      <% end %>
     </page-haeder>
 
     <p id="notice"><%= notice %></p>
