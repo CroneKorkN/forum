@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  permissible_type: MyString
-  permissible_id: 1
+  controller: MyString
   action: MyString
 
 two:
-  permissible_type: MyString
-  permissible_id: 1
+  controller: MyString
   action: MyString

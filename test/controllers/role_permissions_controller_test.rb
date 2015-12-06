@@ -18,7 +18,7 @@ class RolePermissionsControllerTest < ActionController::TestCase
 
   test "should create role_permission" do
     assert_difference('RolePermission.count') do
-      post :create, role_permission: { permission_id: @role_permission.permission_id, role_id: @role_permission.role_id }
+      post :create, role_permission: { grant: @role_permission.grant, permission_id: @role_permission.permission_id, role_id: @role_permission.role_id }
     end
 
     assert_redirected_to role_permission_path(assigns(:role_permission))
@@ -35,7 +35,7 @@ class RolePermissionsControllerTest < ActionController::TestCase
   end
 
   test "should update role_permission" do
-    patch :update, id: @role_permission, role_permission: { permission_id: @role_permission.permission_id, role_id: @role_permission.role_id }
+    patch :update, id: @role_permission, role_permission: { grant: @role_permission.grant, permission_id: @role_permission.permission_id, role_id: @role_permission.role_id }
     assert_redirected_to role_permission_path(assigns(:role_permission))
   end
 

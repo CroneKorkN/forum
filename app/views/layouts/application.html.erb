@@ -20,6 +20,8 @@
 
     <p id="notice"><%= notice %></p>
 
+    <%= Access.granted? "read", "Topic" %>
+
     <%= yield %>
 
   </body>

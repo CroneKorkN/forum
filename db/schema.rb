@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130183619) do
+ActiveRecord::Schema.define(version: 20151205110106) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -42,15 +42,14 @@ ActiveRecord::Schema.define(version: 20151130183619) do
   end
 
   create_table "permissions", force: :cascade do |t|
-    t.string   "permissible_type", limit: 255
-    t.integer  "permissible_id",   limit: 4
-    t.string   "action",           limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "controller", limit: 255
+    t.string   "action",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "permissions", ["permissible_id"], name: "index_permissions_on_permissible_id", using: :btree
-  add_index "permissions", ["permissible_type"], name: "index_permissions_on_permissible_type", using: :btree
+  add_index "permissions", ["action"], name: "index_permissions_on_action", using: :btree
+  add_index "permissions", ["controller"], name: "index_permissions_on_controller", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.text     "content",            limit: 65535
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 20151130183619) do
   create_table "role_permissions", force: :cascade do |t|
     t.integer  "role_id",       limit: 4
     t.integer  "permission_id", limit: 4
+    t.integer  "grant",         limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end

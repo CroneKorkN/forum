@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :role_permissions
+  resources :permissions
   root to: "categories#index"
   
   resources :categories, shallow: true do
@@ -16,10 +18,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :permissions
   resources :roles, shallow: true do
-    resources :role_permissions
-  end
+    end
   
   resources :attachments
   resources :media

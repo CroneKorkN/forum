@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
   def authenticate!
     redirect_to ""
   end
+  
+  def init_access_model
+    Access.current_user = current_user
+  end
+  before_action :init_access_model
 end

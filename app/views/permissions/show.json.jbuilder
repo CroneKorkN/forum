@@ -1,1 +1,1 @@
-json.extract! @permission, :id, :permissible_type, :permissible_id, :action, :created_at, :updated_at
+json.extract! @permission, :id, :controller, :action, :created_at, :updated_at

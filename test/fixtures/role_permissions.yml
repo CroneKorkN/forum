@@ -3,7 +3,9 @@
 one:
   role_id: 
   permission_id: 
+  grant: 1
 
 two:
   role_id: 
   permission_id: 
+  grant: 1
