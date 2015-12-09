@@ -19,8 +19,8 @@
     </page-haeder>
 
     <p id="notice"><%= notice %></p>
-
-    <%= Access.granted? "read", "Topic" %>
+    
+    <%= authorize to: "say hello" %>
 
     <%= yield %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205110106) do
+ActiveRecord::Schema.define(version: 20151207150935) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -122,17 +122,15 @@ ActiveRecord::Schema.define(version: 20151205110106) do
   add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
   create_table "user_roles", force: :cascade do |t|
-    t.integer  "user_id",       limit: 4
-    t.integer  "role_id",       limit: 4
-    t.string   "scopable_type", limit: 255
-    t.integer  "scopable_id",   limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "role_id",     limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "category_id", limit: 4
   end
 
+  add_index "user_roles", ["category_id"], name: "index_user_roles_on_category_id", using: :btree
   add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-  add_index "user_roles", ["scopable_id"], name: "index_user_roles_on_scopable_id", using: :btree
-  add_index "user_roles", ["scopable_type"], name: "index_user_roles_on_scopable_type", using: :btree
   add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -140,8 +138,10 @@ ActiveRecord::Schema.define(version: 20151205110106) do
     t.string   "mail",            limit: 255
     t.string   "password",        limit: 255
     t.string   "password_digest", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.text     "acl",             limit: 65535
+    t.text     "acl_cache",       limit: 65535
   end
 
   add_index "users", ["mail"], name: "index_users_on_mail", using: :btree
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20151205110106) do
   add_foreign_key "settings", "setting_groups"
   add_foreign_key "topics", "categories"
   add_foreign_key "topics", "users"
+  add_foreign_key "user_roles", "categories"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end

@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.root
+    @categories = Category.root.visible_for current_user
   end
 
   # GET /categories/1
