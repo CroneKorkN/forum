@@ -8,8 +8,16 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
   
   serialize :acl_cache
-
-  def keycard
-    @keycard ||= Keycard.new(self)
+  
+  def acl
+    @acl ||= ACL.new(self)
   end
+  
+  def categories
+    Category.where("id IN(?)", acl.visible)
+  end
+  
+private
+  
+  
 end

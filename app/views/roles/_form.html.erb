@@ -15,7 +15,13 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  
+  <% Permission.all.each do |permission| %>
+      <%= check_box_tag :permission_ids, permission.id, @role.permissions.include?(permission), name: 'role[permission_ids][]' %>
+      <%= label_tag :permission_ids, "#{permission.action} #{permission.controller}" %><br>
+  <% end %>
+  
   <div class="actions">
-    <%= f.submit %>
+    <br><%= f.submit %>
   </div>
 <% end %>

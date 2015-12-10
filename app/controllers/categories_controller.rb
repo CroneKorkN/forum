@@ -4,13 +4,14 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.root.visible_for current_user
+#    @categories = Category.root.visible_for current_user
+    @categories = current_user.categories.root
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
-    authorize :read, @category
+    authorize read: @category
   end
 
   # GET /categories/new
