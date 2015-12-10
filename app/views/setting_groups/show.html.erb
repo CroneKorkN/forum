@@ -1,14 +1,3 @@
-<p id="notice"><%= notice %></p>
+<%= render @setting_group %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @setting_group.name %>
-</p>
-
-<p>
-  <strong>Setting group:</strong>
-  <%= @setting_group.setting_group %>
-</p>
-
-<%= link_to 'Edit', edit_setting_group_path(@setting_group) %> |
-<%= link_to 'Back', setting_groups_path %>
+<%= link_to '[e]', edit_setting_group_path(@setting_group) %>

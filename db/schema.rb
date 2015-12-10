@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207150935) do
+ActiveRecord::Schema.define(version: 20151209221024) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 20151207150935) do
 
   create_table "setting_groups", force: :cascade do |t|
     t.string   "name",             limit: 255
-    t.integer  "setting_group_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "setting_group_id", limit: 4,   default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "setting_groups", ["name"], name: "index_setting_groups_on_name", using: :btree
@@ -95,13 +95,13 @@ ActiveRecord::Schema.define(version: 20151207150935) do
   create_table "settings", force: :cascade do |t|
     t.string   "key",              limit: 255
     t.text     "value",            limit: 65535
-    t.string   "type",             limit: 255
     t.string   "name",             limit: 255
     t.text     "description",      limit: 65535
     t.integer  "setting_group_id", limit: 4
     t.integer  "order",            limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "datatype",         limit: 255
   end
 
   add_index "settings", ["key"], name: "index_settings_on_key", using: :btree

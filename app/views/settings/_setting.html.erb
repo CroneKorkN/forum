@@ -1,0 +1,5 @@
+<li>
+  <%= link_to setting.name || setting.key, edit_setting_path(setting) %>:
+  <%= setting.value %> (<%= setting.datatype %>)
+  <br><%= setting.description %>
+</li>

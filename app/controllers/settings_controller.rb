@@ -14,7 +14,8 @@ class SettingsController < ApplicationController
 
   # GET /settings/new
   def new
-    @setting = Setting.new
+    @setting_group = SettingGroup.find(params[:setting_group_id])
+    @setting = @setting_group.settings.new
   end
 
   # GET /settings/1/edit

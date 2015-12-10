@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :attachments
   resources :media
 
-  resources :setting_groups
-  resources :settings
+  resources :setting_groups, shallow: true do
+    resources :settings
+  end
 end

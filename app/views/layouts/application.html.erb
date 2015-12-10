@@ -16,13 +16,11 @@
         <%= link_to "Einloggen", login_path %> |
         <%= link_to "Registrieren", signup_path %>
       <% end %>
+      <%= link_to "admin", "/setting_groups" %>
     </page-haeder>
-
-    <p id="notice"><%= notice %></p>
-    
-    <%= authorize to: "say hello" %>
-
-    <%= yield %>
-
+    <page-content>
+      <p id="notice"><%= notice %></p>
+      <%= yield %>
+    </page-content>
   </body>
 </html>

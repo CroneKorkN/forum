@@ -1,6 +1,8 @@
 class Category < ActiveRecord::Base
   has_many :categories, foreign_key: 'parent_id'
   has_many :topics
+  belongs_to :category
+  has_many :sub_categories
   
   scope :root, ->{ where("parent_id = ?", 0) }
   

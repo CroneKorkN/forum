@@ -25,7 +25,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Topic.find(params[:topic_id]).posts.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    auhtorize to: "update", @post
+    authorize "update", @post
     
     respond_to do |format|
       if @post.update(post_params)

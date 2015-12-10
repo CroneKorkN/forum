@@ -1,0 +1,10 @@
+<li>
+  <h3>
+    <%= link_to setting_group.name, setting_group %>
+    <%= link_to '[+]', new_setting_group_setting_path(setting_group) %>
+  </h3>
+  <ul>
+    <%= render setting_group.setting_groups %>
+    <%= render setting_group.settings %>
+  </ul>
+</li>
