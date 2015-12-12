@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root to: "categories#index"
+  patch "/editable", to: "editables#update"
+
+  resources :groups
   
   resources :categories, shallow: true do
     resources :topics, shallow: true do
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :users, shallow: true do
     resources :user_roles
+    resources :user_groups
   end
   resources :roles, shallow: true do
     resources :role_permissions

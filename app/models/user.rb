@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :attachments
   has_many :user_roles
   has_many :roles, through: :user_roles
+  has_many :user_groups
+  has_many :groups, through: :user_groups
 
   has_secure_password validations: false
   
@@ -14,10 +16,6 @@ class User < ActiveRecord::Base
   end
   
   def categories
-    Category.where("id IN(?)", acl.visible)
+    Category.where("id IN(?)", acl.visible_categories)
   end
-  
-private
-  
-  
 end

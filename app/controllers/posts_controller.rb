@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post.topic, notice: 'Post was successfully created.' }
+        format.html { render :show, status: :created, location: @post }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    authorize "update", @post
+    authorize update: @post
     
     respond_to do |format|
       if @post.update(post_params)

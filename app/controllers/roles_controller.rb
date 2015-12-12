@@ -4,6 +4,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
+    #authorize :admin
     @roles = Role.all
   end
 
@@ -69,6 +70,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name)
+      params.require(:role).permit(:name, permission_ids: [])
     end
 end

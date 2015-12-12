@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209221024) do
+ActiveRecord::Schema.define(version: 20151211091935) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20151209221024) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "groups", ["name"], name: "index_groups_on_name", using: :btree
 
   create_table "media", force: :cascade do |t|
     t.string   "type",       limit: 255
@@ -121,6 +130,16 @@ ActiveRecord::Schema.define(version: 20151209221024) do
   add_index "topics", ["name"], name: "index_topics_on_name", using: :btree
   add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "group_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+
   create_table "user_roles", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
     t.integer  "role_id",     limit: 4
@@ -157,6 +176,8 @@ ActiveRecord::Schema.define(version: 20151209221024) do
   add_foreign_key "settings", "setting_groups"
   add_foreign_key "topics", "categories"
   add_foreign_key "topics", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
   add_foreign_key "user_roles", "categories"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"

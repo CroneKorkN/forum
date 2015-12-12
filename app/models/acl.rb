@@ -4,17 +4,21 @@ class ACL # Access Controll List
   end
   
   def allows(action, object)
-    type = object.class.name.downcase.to_sym
-    id = object.id
-    action = action.to_sym
-    if @acl[type] and @acl[type][id] and @acl[type][id].include?(action)
-      true
+    unless object.nil?
+      type = object.class.name.downcase.to_sym
+      id = object.id
+      action = action.to_sym
+      if @acl[type] and @acl[type][id] and @acl[type][id].include?(action)
+        true
+      end
     else
-      false
+      if @acl[:global] and @acl[:global][action]
+        true
+      end
     end
   end
     
-  def visible
+  def visible_categories
     @acl[:visible]
   end
 
@@ -22,16 +26,18 @@ private
 
   {
     category: {
+      "1": ["read"]
       
     },
-    visible: 1
-    
+    visible: [1, 5, 6, 8]
   }
   
   def build_acl(user)
-    acl = {}
-    acl[:category] = {}
-    acl[:visible]  = []
+    acl = {
+      global: [],
+      category: {},
+      visible: []
+    }
     Category.all.each do |category|
       puts 1
       user.user_roles.where(category_id: category.id).each do |user_role|

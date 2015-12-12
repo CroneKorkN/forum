@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var app = function() {
+  console.log("initialize");
+  $("[data-editable]").editable();
+  $("app-body").topic();
+}
+$(document).ready(app);

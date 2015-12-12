@@ -12,7 +12,11 @@ class ApplicationController < ActionController::Base
   # first arg: ommit or user; second arg: `action: object`
   def authorize(*args)
     user, action, object = authorization_arguments(args)
-    Authorization.new user, action, object
+    begin
+      Authorization.new user, action, object
+    rescue Exceptions::AuthorizationError
+      render text: "Prohibited"
+    end
   end
   
   def authenticate!
@@ -26,14 +30,19 @@ private
   end
   
   def authorization_arguments(args)
-    parsed = []
+    # user?
     if args.first.class == "User"
-      parsed << args.shift
+      user = args.shift
     else
-      parsed << current_user
+      user = current_user
     end
-    parsed << args.first.keys.first.to_sym
-    parsed << args.first.values.first
-    return parsed
+    # global?
+    if args.first.is_a? Symbol
+      action = args.first
+    elsif args.first.is_a? Hash
+      action = args.first.keys.first.to_sym
+      object = args.first.values.first
+    end
+    return [user, action, object]
   end
 end
