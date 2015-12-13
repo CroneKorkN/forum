@@ -1,5 +1,5 @@
-li.topic-post.new
-  post-user
+li.post.new
+  .author
     = current_user.name
-  post-content data-answer-content=""
+  .content data-answer-content="" contenteditable=""
   button data-send-answer="" data-topic-id=@topic.id Antworten

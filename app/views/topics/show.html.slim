@@ -1,6 +1,6 @@
-h2
-  = @topic.name
-ul.posts
-  = render @topic.posts 
-  = render "answer"
-= link_to 'Answer', new_topic_post_path(@topic)
+section.topic
+  h2
+    = editable @topic, :name
+  ul.posts
+    = render @topic.posts 
+    = render "posts/new"

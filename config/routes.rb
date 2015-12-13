@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "categories#index"
   patch "/editable", to: "editables#update"
+  get "/backend", to: "backend#show", as: 'backend'
 
   resources :groups
   

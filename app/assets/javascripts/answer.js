@@ -11,6 +11,7 @@ $.fn.answer = function() {
       dataType: 'html',
     }).done(function(data) {
       $(".posts .new").before(data);
+      content = $("[data-answer-content]").html("");
     });    
   });
 }

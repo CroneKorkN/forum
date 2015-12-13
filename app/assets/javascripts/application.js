@@ -12,12 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require_tree .
 
 var app = function() {
   console.log("initialize");
-  $("[data-editable]").editable();
+
   $("app-body").topic();
+  
+  var editing = false;
+  $("[data-edit]").click(function(){
+    if (editing) {
+      editing = false
+      $("[data-editable]").editable(false);
+    } else {
+      editing = true
+      $("[data-editable]").editable();
+    }
+  });
 }
 $(document).ready(app);

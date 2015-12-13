@@ -1,0 +1,17 @@
+h1
+  = link_to "Forum", "/"
+
+user-menu
+  - if current_user
+    | Hallo 
+    = current_user.name
+    |  &bull; 
+    = link_to "Log Out", logout_path
+  - else
+    = link_to "Einloggen", login_path 
+    |  &bull; 
+    = link_to "Registrieren", signup_path
+  |  &bull; 
+  = link_to "admin", backend_path
+  |  &bull; 
+  button [data-edit] = "[edit]"

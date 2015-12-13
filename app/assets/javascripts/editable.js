@@ -1,5 +1,13 @@
-$.fn.editable = function() {
+$.fn.editable = function(active=true) {
+  if (active == false) {
+    this.unbind();
+    $(this).removeAttr("contenteditable");
+    return $(this);
+  }
+  
   var old_value = "";
+
+  $(this).attr("contenteditable", "")
 
   this.focus(function() {
     if (!$(this).data("editable-editing")) {
@@ -25,25 +33,13 @@ $.fn.editable = function() {
     var value = stripHTML($(this).html());
     var dataType = $(this).data("editable-datatype");
     var display_with = $(this).data("editable-display-with");
-
-    // unchanged?
-    if ($(this).data("editable-display-with")) {
-      if (value == $(this).data("editable-value")) {
-        $(this).html(old_value);
-        return;
-      }
-    }
-
-    // validate
+    $("[data-editable]").editable();
     if (validate_editable(value, dataType)) {
       $(this).attr("data-editable-invalid", false);
     } else {
       $(this).attr("data-editable-invalid", true);
       return;
     }
-    
-    //{"post"=>{"topic_id"=>"1", "content"=>"hallo welt"}, "id"=>"1"}
-
 
     // send
     $.ajax({
@@ -73,6 +69,7 @@ $.fn.editable = function() {
       container.innerHTML = dirtyString;
       return container.textContent || container.innerText;
   }
+  return $(this);
 }
 
 
