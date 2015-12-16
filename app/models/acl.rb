@@ -28,7 +28,6 @@ private
   {
     category: {
       "1": ["read"]
-      
     },
     visible: [1, 5, 6, 8]
   }

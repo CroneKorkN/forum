@@ -1,5 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  layout "backend", only: [:manage]
+  
+  def manage
+    @categories = Category.root
+  end
   
   # GET /categories
   # GET /categories.json
@@ -16,7 +21,11 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = Category.new
+    if params[:category_id]
+      @category = Category.find(params[:category_id]).categories.new
+    else
+      @category = Category.new
+    end
   end
 
   # GET /categories/1/edit

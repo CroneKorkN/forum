@@ -1,0 +1,9 @@
+h2
+  = editable @user, :name
+
+p
+  = editable @user, :mail
+  
+p
+  = render @user.media
+  = render "media/form"

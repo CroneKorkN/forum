@@ -1,16 +1,17 @@
 class User < ActiveRecord::Base
   has_many :topics
   has_many :posts
+  has_many :media
   has_many :attachments
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :user_groups
   has_many :groups, through: :user_groups
 
-  has_secure_password validations: false
-  
   serialize :acl_cache
-  
+
+  has_secure_password validations: false
+
   def acl
     @acl ||= ACL.new(self)
   end

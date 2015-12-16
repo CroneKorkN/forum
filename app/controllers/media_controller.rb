@@ -24,7 +24,7 @@ class MediaController < ApplicationController
   # POST /media
   # POST /media.json
   def create
-    @medium = Medium.new(medium_params)
+    @medium = User.find(params[:user_id]).media.new(medium_params)
 
     respond_to do |format|
       if @medium.save
@@ -69,6 +69,6 @@ class MediaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medium_params
-      params.require(:medium).permit(:type, :location)
+      params.require(:medium).permit(:type, :file, :user_id)
     end
 end

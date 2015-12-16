@@ -1,19 +1,25 @@
 Rails.application.routes.draw do
+  resources :group_users
   root to: "categories#index"
   patch "/editable", to: "editables#update"
   get "/backend", to: "backend#show", as: 'backend'
 
   resources :groups
   
+  get "/categories/manage", to: "categories#manage", as: 'manage_categories'
   resources :categories, shallow: true do
+    get "sub_categories/new", to: "categories#new", as: 'new_sub_category'
     resources :topics, shallow: true do
-      resources :posts      
+      resources :posts, shallow: true do
+        resources :attachments
+      end
     end
   end
 
   resources :users, shallow: true do
     resources :user_roles
     resources :user_groups
+    resources :media
   end
   resources :roles, shallow: true do
     resources :role_permissions
@@ -25,10 +31,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   
-  resources :attachments
-  resources :media
 
   resources :setting_groups, shallow: true do
-    resources :settings
+    resources :settings, shallow: true
   end
 end

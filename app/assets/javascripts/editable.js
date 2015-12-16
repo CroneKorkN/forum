@@ -2,12 +2,14 @@ $.fn.editable = function(active=true) {
   if (active == false) {
     this.unbind();
     $(this).removeAttr("contenteditable");
+    $(this).removeClass("editing")
     return $(this);
   }
   
   var old_value = "";
 
   $(this).attr("contenteditable", "")
+  $(this).addClass("editing")
 
   this.focus(function() {
     if (!$(this).data("editable-editing")) {
@@ -30,7 +32,7 @@ $.fn.editable = function(active=true) {
     var model = $(this).data("editable-model");
     var id = $(this).data("editable-id");
     var method = $(this).data("editable-method");
-    var value = stripHTML($(this).html());
+    var value = $(this).html();
     var dataType = $(this).data("editable-datatype");
     var display_with = $(this).data("editable-display-with");
     $("[data-editable]").editable();

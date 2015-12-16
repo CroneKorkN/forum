@@ -4,13 +4,15 @@ h1
 user-menu
   - if current_user
     | Hallo 
-    = current_user.name
+    = link_to current_user.name, current_user
     |  &bull; 
     = link_to "Log Out", logout_path
   - else
     = link_to "Einloggen", login_path 
     |  &bull; 
     = link_to "Registrieren", signup_path
+  |  &bull; 
+  = link_to "users", users_path
   |  &bull; 
   = link_to "admin", backend_path
   |  &bull; 

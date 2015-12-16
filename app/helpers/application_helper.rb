@@ -2,9 +2,10 @@ module ApplicationHelper
   def editable(object,
                method,
                display_with: nil,
-               element: "span",
+               tag: "span",
                classname: "editable",
-               active: false)
+               active: false,
+               ondemand: false)
 
     datatype   = object.class.columns_hash[method.to_s].type
     model      = object.class.model_name.singular
@@ -14,9 +15,10 @@ module ApplicationHelper
     raw_value  = object.send(method)
     value      = eval "#{display_with} raw_value"
     contenteditable = "contenteditable=\"\"" if active
+    ondemand_class  =  ondemand ? "ondemand" : ""
     # value = send(display_with, raw_value)
 
-    return "<#{element} class=#{classname} data-editable=\"#{identifier}\"\
+    return "<#{tag} class=\"#{classname} #{ondemand}\" data-editable=\"#{identifier}\"\
                   data-editable-model=\"#{model}\"\
                   data-editable-id=\"#{id}\"\
                   data-editable-method=\"#{method}\"\
@@ -24,7 +26,7 @@ module ApplicationHelper
                   data-editable-value=\"#{raw_value}\"\
                   data-editable-url=\"#{url}\"\
                   data-editable-display-with=\"#{display_with}\"
-                  #{contenteditable}>#{value}</span>".html_safe
+                  #{contenteditable}>#{value}</#{tag}>".html_safe
   end
 
   def number_to_currency(number)

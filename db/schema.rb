@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211091935) do
+ActiveRecord::Schema.define(version: 20151214214057) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -29,10 +29,21 @@ ActiveRecord::Schema.define(version: 20151211091935) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "parent_id",   limit: 4,     default: 0
+    t.integer  "category_id", limit: 4
   end
 
+  add_index "categories", ["category_id"], name: "index_categories_on_category_id", using: :btree
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
-  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer  "group_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id", using: :btree
+  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -44,11 +55,16 @@ ActiveRecord::Schema.define(version: 20151211091935) do
   add_index "groups", ["name"], name: "index_groups_on_name", using: :btree
 
   create_table "media", force: :cascade do |t|
-    t.string   "type",       limit: 255
-    t.string   "location",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "user_id",           limit: 4
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
+    t.integer  "file_file_size",    limit: 4
+    t.datetime "file_updated_at"
   end
+
+  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.string   "controller", limit: 255
@@ -146,9 +162,11 @@ ActiveRecord::Schema.define(version: 20151211091935) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "category_id", limit: 4
+    t.boolean  "recursive"
   end
 
   add_index "user_roles", ["category_id"], name: "index_user_roles_on_category_id", using: :btree
+  add_index "user_roles", ["recursive"], name: "index_user_roles_on_recursive", using: :btree
   add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
   add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
@@ -168,6 +186,10 @@ ActiveRecord::Schema.define(version: 20151211091935) do
 
   add_foreign_key "attachments", "media"
   add_foreign_key "attachments", "posts"
+  add_foreign_key "categories", "categories"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
+  add_foreign_key "media", "users"
   add_foreign_key "posts", "topics"
   add_foreign_key "posts", "users"
   add_foreign_key "role_permissions", "permissions"

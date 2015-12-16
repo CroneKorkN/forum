@@ -25,9 +25,11 @@ var app = function() {
     if (editing) {
       editing = false
       $("[data-editable]").editable(false);
+      $("app-container").removeClass("editing");
     } else {
       editing = true
       $("[data-editable]").editable();
+      $("app-container").addClass("editing");
     }
   });
 }

@@ -1,4 +1,4 @@
-li.post
+li.post class=("own" if post.user == current_user)
   .author
     = post.user.name if post.user
   .content 

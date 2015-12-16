@@ -6,6 +6,7 @@ class RolesController < ApplicationController
   def index
     #authorize :admin
     @roles = Role.all
+    @permissions = Permission.all
   end
 
   # GET /roles/1

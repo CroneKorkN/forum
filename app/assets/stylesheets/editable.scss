@@ -1,0 +1,7 @@
+.editable.editing {
+  background: lightyellow;
+}
+
+app-container:not(.editing) if-editing {
+  display: none;
+}

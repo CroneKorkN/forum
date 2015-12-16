@@ -1,0 +1,17 @@
+li
+  = editable setting, :name
+  =< editable setting, :value
+  if-editing
+    div
+      | (
+      = editable setting, :key
+      | )
+  if-editing
+    div
+      | (
+      = editable setting, :datatype
+      | )
+  = editable setting, :description, tag: :div
+  if-editing
+    = link_to "[x]", setting_path(setting), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }
+    
