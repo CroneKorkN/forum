@@ -1,6 +1,9 @@
 h2
   = editable @user, :name
 
+div.avatar
+  = render = image_tag @user.medium.file.url :thumbnail
+
 p
   = editable @user, :mail
   

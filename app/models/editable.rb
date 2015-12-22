@@ -1,26 +1,16 @@
 class Editable
-  def initialize(
-      object,
-      method,
-      display_with: nil,
-      tag: "span",
-      classname: "editable",
-      active: false,
-      ondemand: false
-    )
+  def initialize(params)
+    
 
-    datatype   = object.class.columns_hash[method.to_s].type
-    model      = object.class.model_name.singular
-    id         = object.send object.class.primary_key
-    url        = url_for(object)
-    identifier = "#{model}_#{id}_#{method}"
-    raw_value  = object.send(method)
-    value      = eval "#{display_with} raw_value"
-    contenteditable = "contenteditable=\"\"" if active
-    ondemand_class  =  ondemand ? "ondemand" : ""
-    # value = send(display_with, raw_value)
-
-
+    @datatype        = params[0].class.columns_hash[method.to_s].type
+    @model           = object.class.model_name.singular
+    @id              = object.send object.class.primary_key
+    @url             = url_for(object)
+    @identifier      = "#{model}_#{id}_#{method}"
+    @raw_value       = object.send(method)
+    @value           = parse_value raw_value, display_with
+    @contenteditable = active ? 'contenteditable=""' : ''
+    @ondemand_class  = ondemand ? "ondemand" : ""
   end
   
   def print
@@ -33,7 +23,9 @@ class Editable
         data-editable-value=\"#{@raw_value}\"\
         data-editable-url=\"#{@url}\"\
         data-editable-display-with=\"#{@display_with}\"
-      #{@contenteditable}>#{@value}</#{@tag}>
-    ".html_safe
+        #{@contenteditable}>
+          #{@value}
+      </#{@tag}>
+    ".squish..html_safe
   end
 end

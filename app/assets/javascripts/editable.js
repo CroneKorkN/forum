@@ -1,5 +1,5 @@
-$.fn.editable = function(active=true) {
-  if (active == false) {
+$.fn.editable = function(activate=true) {
+  if (activate === false) {
     this.unbind();
     $(this).removeAttr("contenteditable");
     $(this).removeClass("editing")

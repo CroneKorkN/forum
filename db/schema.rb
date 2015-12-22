@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214214057) do
+ActiveRecord::Schema.define(version: 20151216160859) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -179,9 +179,11 @@ ActiveRecord::Schema.define(version: 20151214214057) do
     t.datetime "updated_at",                    null: false
     t.text     "acl",             limit: 65535
     t.text     "acl_cache",       limit: 65535
+    t.integer  "medium_id",       limit: 4
   end
 
   add_index "users", ["mail"], name: "index_users_on_mail", using: :btree
+  add_index "users", ["medium_id"], name: "index_users_on_medium_id", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
 
   add_foreign_key "attachments", "media"
@@ -203,4 +205,5 @@ ActiveRecord::Schema.define(version: 20151214214057) do
   add_foreign_key "user_roles", "categories"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "users", "media"
 end

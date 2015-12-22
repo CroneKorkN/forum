@@ -1,6 +1,14 @@
 h1
   = link_to "Forum", "/"
 
+|  &bull; 
+= link_to "users", users_path
+
+|  &bull; 
+= link_to "admin", backend_path
+
+placeholder
+  
 user-menu
   - if current_user
     | Hallo 
@@ -11,9 +19,4 @@ user-menu
     = link_to "Einloggen", login_path 
     |  &bull; 
     = link_to "Registrieren", signup_path
-  |  &bull; 
-  = link_to "users", users_path
-  |  &bull; 
-  = link_to "admin", backend_path
-  |  &bull; 
   button [data-edit] = "[edit]"

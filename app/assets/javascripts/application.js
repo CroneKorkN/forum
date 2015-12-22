@@ -21,16 +21,6 @@ var app = function() {
   $("app-body").topic();
   
   var editing = false;
-  $("[data-edit]").click(function(){
-    if (editing) {
-      editing = false
-      $("[data-editable]").editable(false);
-      $("app-container").removeClass("editing");
-    } else {
-      editing = true
-      $("[data-editable]").editable();
-      $("app-container").addClass("editing");
-    }
-  });
+  $("[data-edit]").edit_button();
 }
 $(document).ready(app);

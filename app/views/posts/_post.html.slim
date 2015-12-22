@@ -1,5 +1,9 @@
 li.post class=("own" if post.user == current_user)
   .author
+    avatar
+      = image_tag post.user.avatar.file.url(:thumbnail), class: "avatar" if post.user
     = post.user.name if post.user
   .content 
-    = editable post, :content
+    = editable post, :content, activate: :button
+    if-editing
+      = link_to 'Destroy', post, data: {:confirm => 'Are you sure?'}, :method => :delete

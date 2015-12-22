@@ -9,12 +9,15 @@ html
   body
     app-container
       header
-        = render 'head'
+        wrapper
+          = render 'head'
       app-body
-        p id="notice"
-          = notice
-        nav
-          = render "pagination"
-        = yield
+        wrapper
+          p id="notice"
+            = notice
+          nav
+            = render "pagination"
+          = yield
       footer
-        = render 'foot'
+        wrap
+          = render 'foot'

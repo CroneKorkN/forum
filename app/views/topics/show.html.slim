@@ -1,6 +1,6 @@
 section.topic
   h2
-    = editable @topic, :name
+    = editable @topic, :name, activate: :button
   ul.posts
     = render @topic.posts 
     = render "posts/new"
