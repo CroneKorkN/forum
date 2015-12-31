@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'test/new'
+
   resources :group_users
   root to: "categories#index"
   patch "/editable", to: "editables#update"

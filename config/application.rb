@@ -25,5 +25,8 @@ module Forum
     
     #ckn
     config.autoload_paths << Rails.root.join('app/lib')
+    
+    # ckn websocket hack
+    config.middleware.delete Rack::Lock
   end
 end

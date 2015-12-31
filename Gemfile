@@ -49,3 +49,4 @@ gem 'mysql2', '~> 0.3.18'
 gem 'thin'
 gem "slim-rails"
 gem "paperclip", "~> 4.3"
+gem "websocket-rails", " ~> 0.7"

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 // require turbolinks
 //= require_tree .
+//= require websocket_rails/main
 
 var app = function() {
   console.log("initialize");
@@ -22,5 +23,30 @@ var app = function() {
   
   var editing = false;
   $("[data-edit]").edit_button();
+  
+  
+
+////////////////////////////////
+
+  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+  var success = function(response) {
+    console.log("You are awesome because: "+response.message);
+  }
+
+  var failure = function(response) {
+    console.log("You are not very awesome because: "+response.message);
+  }
+
+  var message = { awesomeness: 4 }
+  dispatcher.trigger('awesomeness_approval', message, success, failure); 
+  
 }
+
 $(document).ready(app);
+
+
+
+
+
+
