@@ -4,7 +4,7 @@ li.post class=("own" if post.user == current_user)
       = image_tag post.user.avatar.file.url(:thumbnail) if post.user
   .content 
     article.bubble
-      = editable post, :content, activate: :button
+      = editable post, :content, trigger: :button
       .if-editing
         = link_to 'Destroy', post, data: {:confirm => 'Are you sure?'}, :method => :delete
     .author

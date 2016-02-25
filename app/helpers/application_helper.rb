@@ -4,7 +4,7 @@ module ApplicationHelper
       method,
       display_with: nil,
       tag: "span",
-      activate: true
+      trigger: "auto"
     )
 
     datatype        = object.class.columns_hash[method.to_s].type
@@ -14,10 +14,10 @@ module ApplicationHelper
     identifier      = "#{method}_#{model}_#{id}"
     raw_value       = object.send(method)
     value           = display_with ? send(display_with, raw_value) : raw_value
-    if activate == true
-      activate_text = "contenteditable=\"\""
+    if trigger == true
+      trigger_text = "contenteditable=\"\""
     else
-      activate_text = "data-editable-activate=\"#{activate.to_s}\""
+      trigger_text = "data-editable-trigger=\"#{trigger.to_s}\""
     end
     
     return "
@@ -30,7 +30,7 @@ module ApplicationHelper
       data-editable-value=\"#{raw_value}\"\
       data-editable-url=\"#{url}\"\
       data-editable-display-with=\"#{display_with}\"
-      #{activate_text}>
+      #{trigger_text}>
         #{value}
       </#{tag}>
       ".html_safe

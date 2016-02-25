@@ -1,15 +1,15 @@
-$.fn.editable = function(activate=true) {
-  if (activate === false) {
+$.fn.editable = function(trigger=true) {
+  if (trigger === false) {
     this.unbind();
     $(this).removeAttr("contenteditable");
-    $(this).removeClass("editing")
+    $(this).removeClass("editing");
     return $(this);
   }
   
   var old_value = "";
 
-  $(this).attr("contenteditable", "")
-  $(this).addClass("editing")
+  $(this).attr("contenteditable", "");
+  $(this).addClass("editing");
 
   this.focus(function() {
     if (!$(this).data("editable-editing")) {
