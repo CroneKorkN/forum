@@ -1,6 +1,8 @@
 section.topic
-  h2
-    = editable @topic, :name, activate: :button
+  header
+    h2
+      = editable @topic, :name, activate: :button
+    = pluralize @topic.posts.count, "posts"
   ul.posts
     = render @topic.posts 
     = render "posts/new"

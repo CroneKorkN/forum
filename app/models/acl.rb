@@ -5,6 +5,7 @@ class ACL # Access Controll List
   end
   
   def allows(action, object)
+    false
     unless object.nil?
       permission = "#{action}_#{object.class.name.downcase}".to_sym
       id = category_id_of object

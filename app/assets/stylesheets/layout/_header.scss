@@ -1,9 +1,8 @@
-header {
-  
+.header {
   padding: 1rem 0;
-  background: grey;
+  background: #ef8807;
   color: white;
-  
+  box-shadow: $shadow;
   
   h1 {
     margin: 0;

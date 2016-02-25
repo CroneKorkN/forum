@@ -2,7 +2,7 @@ h2
   = editable @user, :name
 
 div.avatar
-  = render = image_tag @user.medium.file.url :thumbnail
+  = image_tag @user.medium.file.url :thumbnail if @user.medium
 
 p
   = editable @user, :mail
@@ -10,3 +10,6 @@ p
 p
   = render @user.media
   = render "media/form"
+  
+p
+  = render @user.topics.uniq

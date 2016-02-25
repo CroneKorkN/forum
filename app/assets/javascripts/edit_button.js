@@ -1,11 +1,11 @@
 $.fn.edit_button = function() {
   $(this).click(function(){
-    if ($("app-container").hasClass("editing")) {
+    if ($("body").hasClass("editing")) {
       $("[data-editable-activate=\"button\"]").editable(false);
-      $("app-container").removeClass("editing");
+      $("body").removeClass("editing");
     } else {
       $("[data-editable-activate=\"button\"]").editable();
-      $("app-container").addClass("editing");
+      $("body").addClass("editing");
     }
   });
 }

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :topics
   has_many :posts
+  has_many :topics,
+           through: :posts
   has_many :media
   has_many :attachments
   has_many :user_roles

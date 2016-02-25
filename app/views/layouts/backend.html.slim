@@ -6,15 +6,17 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
-    app-container
-      header
+  body.app
+    header.header
+      .wrapper
         = render 'head'
-      app-body
+    main.main
+      .wrapper
         p id="notice"
           = notice
-        nav
-        = render "backend/tabs"
+        nav.nav
+          = render "pagination"
         = yield
-      footer
+    footer.footer
+      .wrapper
         = render 'foot'
