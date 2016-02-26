@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  root to: "users#activity"
   get 'test/new'
 
   resources :group_users
-  root to: "categories#index"
   patch "/editable", to: "editables#update"
   get "/backend", to: "backend#show", as: 'backend'
 
@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   
-
   resources :setting_groups, shallow: true do
     resources :settings, shallow: true
   end
+  get "/settings", to: "settings#index"
 end

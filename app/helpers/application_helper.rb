@@ -3,8 +3,8 @@ module ApplicationHelper
       object,
       method,
       display_with: nil,
-      tag: "span",
-      trigger: "auto"
+      tag: :span,
+      trigger: :global
     )
 
     datatype        = object.class.columns_hash[method.to_s].type
@@ -14,14 +14,14 @@ module ApplicationHelper
     identifier      = "#{method}_#{model}_#{id}"
     raw_value       = object.send(method)
     value           = display_with ? send(display_with, raw_value) : raw_value
-    if trigger == true
+    if trigger.to_sym == :auto
       trigger_text = "contenteditable=\"\""
     else
       trigger_text = "data-editable-trigger=\"#{trigger.to_s}\""
     end
     
     return "
-      <#{tag} class=\"editable\"\
+      <#{tag.to_s} class=\"editable\"\
       data-editable=\"#{identifier}\"\
       data-editable-model=\"#{model}\"\
       data-editable-id=\"#{id}\"\
@@ -32,7 +32,7 @@ module ApplicationHelper
       data-editable-display-with=\"#{display_with}\"
       #{trigger_text}>
         #{value}
-      </#{tag}>
+      </#{tag.to_s}>
       ".html_safe
   end
 end
