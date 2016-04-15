@@ -3,7 +3,7 @@ class ACL # Access Controll List
     @acl = user.acl_cache || build_acl(user)
     @acl = build_acl(user)
   end
-  
+
   def allows(action, object)
     false
     unless object.nil?
@@ -19,7 +19,7 @@ class ACL # Access Controll List
       end
     end
   end
-    
+
   def visible_categories
     @acl[:visible]
   end
@@ -32,7 +32,7 @@ private
     },
     visible: [1, 5, 6, 8]
   }
-  
+
   def build_acl user
     acl = {
       global: [],
@@ -43,7 +43,7 @@ private
       user.user_roles.where(category_id: category.id).each do |user_role|
         acl[:category][category.id] = [] if not acl[:category][category.id]
         user_role.role.permissions.each do |permission|
-          acl[:category][category.id] << "#{permission.action}_#{permission.controller}".to_sym
+          acl[:category][category.id] << "#{permission.action}_#{permission.controller.downcase}".to_sym
           acl[:visible] << category.id
         end
       end
@@ -52,7 +52,7 @@ private
     user.update acl_cache: acl
     acl
   end
-  
+
   def category_id_of object
     if object.class.name == "Category"
       object.id

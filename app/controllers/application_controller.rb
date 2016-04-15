@@ -8,28 +8,29 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-  
+
   # first arg: ommit or user; second arg: `action: object`
   def authorize(*args)
-    user, action, object = authorization_arguments(args)
+    user, action, object = extract_authorization_arguments(args)
+    p "######## #{user} #{action} #{object}"
     begin
       Authorization.new user, action, object
     rescue Exceptions::AuthorizationError
       render text: "Prohibited"
     end
   end
-  
+
   def authenticate!
     redirect_to ""
   end
-  
+
 private
-  
+
   def require_login
     redirect_to login_url unless current_user
   end
-  
-  def authorization_arguments(args)
+
+  def extract_authorization_arguments(args)
     # user?
     if args.first.class == "User"
       user = args.shift
