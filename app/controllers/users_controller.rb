@@ -2,12 +2,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :require_login, only: [:new, :create]
 
+  def avater_selection
+  end
+
   # GET /users
   # GET /users.json
   def index
     @users = User.all
   end
-  
+
   def activity
   end
 

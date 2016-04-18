@@ -7,9 +7,7 @@
           li = message
 
   .field
-    = f.label :controller
-    = f.text_field :controller
-  .field
-    = f.label :action
-    = f.text_field :action
+    = f.text_field :action, placeholder: "action"
+    = f.text_field :controller, placeholder: "Controller"
+    
   .actions = f.submit

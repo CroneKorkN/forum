@@ -1,7 +1,7 @@
 li.post class=("own" if post.user == current_user)
   .info
     .avatar
-      = image_tag post.user.avatar.file.url(:thumbnail) if post.user
+      = image_tag post.user.avatar.file.url(:thumbnail) if post.user and post.user.avatar
   .content 
     article.speechbubble
       = editable post, :content, trigger: :button
