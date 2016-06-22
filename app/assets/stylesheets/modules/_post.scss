@@ -1,7 +1,7 @@
 .post {
   display: flex;
   margin: 1rem 0;
-  
+
   /*&.own {
     .info {
       order: 2;
@@ -19,7 +19,7 @@
   .info {
     flex-grow: 0;
     text-align: center;
-    
+
     .avatar, .answer {
       display: flex;
       justify-content: center;
@@ -36,9 +36,9 @@
       img {
         height: 100%;
       }
-    }  
+    }
   }
-  
+
   .content {
     flex-grow: 1;
 
@@ -47,7 +47,7 @@
       min-height: 1em;
 
       display: block;
-      padding: .4em .8em;
+      padding: .4rem .8rem;
       background: white;
       border-radius: 4px;
       box-shadow: $shadow;
@@ -56,14 +56,18 @@
   &.new .speechbubble {
     min-height: 3rem;
   }
-  
+
+  &.new .info .button {
+    padding: 1rem;
+  }
+
   .author {
     margin-top: 0.5rem;
     font-size: 0.8rem;
-    margin-left: .8em;
+    margin-left: .8rem;
     color: rgba(0, 0, 0, 0.5);
   }
-  
+
   .answer {
     border: 0;
     color: #080;
